@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myfirstapp/transaction_list.dart';
 
@@ -47,23 +48,29 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         builder: (context) {
           return Column(
             children: [
-              TextField(
-                decoration: const InputDecoration(labelText: 'Content'),
-                controller: _contentController,
-                onChanged: (text) {
-                  setState(() {
-                    _transaction.content = text;
-                  });
-                },
+              Container(
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  decoration: const InputDecoration(labelText: 'Content'),
+                  controller: _contentController,
+                  onChanged: (text) {
+                    setState(() {
+                      _transaction.content = text;
+                    });
+                  },
+                ),
               ),
-              TextField(
-                decoration: const InputDecoration(labelText: 'Amount(money)'),
-                controller: _amountController,
-                onChanged: (text) {
-                  setState(() {
-                    _transaction.amount = double.tryParse(text)!;
-                  });
-                },
+              Container(
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  decoration: const InputDecoration(labelText: 'Amount(money)'),
+                  controller: _amountController,
+                  onChanged: (text) {
+                    setState(() {
+                      _transaction.amount = double.tryParse(text)!;
+                    });
+                  },
+                ),
               ),
               Container(
                 padding: EdgeInsets.all(10),
@@ -82,6 +89,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                             setState(() {
                               this._insertTransaction();
                             });
+                            Navigator.of(context).pop();
                           }),
                       height: 50,
                     )),
@@ -111,6 +119,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text('Transaction manager'),
         actions: [
           IconButton(
@@ -126,6 +135,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         onPressed: () {
           _onBottomShowModalSheet();
         },
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       key: _scaffoldKey,
       body: SafeArea(
@@ -140,9 +150,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                     child: FlatButton(
                       child: const Text(
                         'Insert Transaction',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(
+                            fontSize: 18, fontFamily: "Pacifico"),
                       ),
-                      color: Colors.pinkAccent,
+                      color: Theme.of(context).accentColor,
                       textColor: Colors.white,
                       onPressed: () {
                         this._onBottomShowModalSheet();
